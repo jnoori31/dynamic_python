@@ -15,7 +15,7 @@ def test_climbStairs():
     # Failing case
     assert climbStairs(5) != 10  # This assertion will fail
     
-    print("All tests passed!")
+    print("All tests passed!!")
 
 # Run the unit tests
 test_climbStairs()
