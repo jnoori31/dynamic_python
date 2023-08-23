@@ -1,0 +1,36 @@
+trigger:
+  branches:
+    include:
+      - development  # Your development branch name
+
+pr:
+  branches:
+    include:
+      - development  # Your development branch name
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: BuildAndTest
+  jobs:
+  - job: BuildAndTest
+    steps:
+    - script: echo 'Building and testing...'
+      displayName: 'Build and Test'
+
+- stage: MergeToMain
+  dependsOn: BuildAndTest
+  jobs:
+  - job: MergeToMain
+    steps:
+    - script: echo 'Merging to main...'
+      displayName: 'Merge to Main'
+
+- stage: PublishResults
+  dependsOn: MergeToMain
+  jobs:
+  - job: PublishResults
+    steps:
+    - script: echo 'Publishing test results...'
+      displayName: 'Publish Test Results'
