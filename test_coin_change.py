@@ -3,7 +3,7 @@ from coin_change import Solution
 def test_coinChange():
     sol = Solution()
 
-    # Test cases with a passing result
+    # Test cases with a passing result.
     coins = [1, 2, 5]
     amount = 11
     assert sol.coinChange(coins, amount) == 3  # 11 = 5 + 5 + 1
