@@ -23,7 +23,7 @@ def test_coinChange():
 
     coins = []
     amount = 5
-    assert sol.coinChange(coins, amount) == -1  # No coins available!
+    assert sol.coinChange(coins, amount) == -1  # No coins available!!
 
     coins = [1, 3, 4]
     amount = 7
