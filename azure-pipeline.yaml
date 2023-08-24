@@ -1,12 +1,12 @@
 trigger:
   branches:
     include:
-      - development  # Your development branch name
+      - development  # Your development branch name.
 
 pr:
   branches:
     include:
-      - development  # Your development branch name
+      - development  # Your development branch name.
 
 pool:
   vmImage: 'ubuntu-latest'
