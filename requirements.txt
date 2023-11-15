@@ -1,0 +1,13 @@
+# requirements.txt
+
+# pre-commit-hooks
+https://github.com/pre-commit/pre-commit-hooks/archive/v4.5.0.tar.gz
+
+# black
+black==23.11.0
+
+# isort
+isort==5.12.0
+
+# flake8
+flake8==6.1.0
