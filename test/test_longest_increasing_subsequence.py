@@ -1,8 +1,9 @@
-from longest_increasing_subsequence import Solution
 import unittest
 
-class TestSolution(unittest.TestCase):
+from longest_increasing_subsequence import Solution
 
+
+class TestSolution(unittest.TestCase):
     def setUp(self):
         # Initialize your testing setup if needed
         pass
@@ -27,11 +28,13 @@ class TestSolution(unittest.TestCase):
         result = solution.LengthOfLIS(nums)
         expected_result = 4
         print(f"Test length_of_lis_fail Result: {result}")
-        
+
         if result != expected_result:
             print(f"Fail: Expected {expected_result}, but got {result}")
-        
-        self.assertNotEqual(result, expected_result)  # Update to the correct expected result
+
+        self.assertNotEqual(
+            result, expected_result
+        )  # Update to the correct expected result
 
     def test_length_of_lis_empty_list(self):
         # Test case where nums is an empty list, leading to a ValueError
@@ -90,7 +93,7 @@ class TestSolution(unittest.TestCase):
     def test_length_of_lis_type_error(self):
         # Test case where nums contains a string, leading to a TypeError
         solution = Solution()
-        nums = [1, 2, 3, "fairy", 5]  # Incorrect: includes a non-integer element
+        nums = [1, 2, 3, "fairy", 5]  # Incorrect: includes a non-integer
 
         try:
             result = solution.LengthOfLIS(nums)
@@ -99,7 +102,7 @@ class TestSolution(unittest.TestCase):
             print(f"Test length_of_lis_type_error Result: {e}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
 
-# Run this command to see results of test (pytest -s test_longest_increasing_subsequence.py)
+# results of test (pytest -s test_longest_increasing_subsequence.py)

@@ -1,8 +1,9 @@
-from longest_common_subsequence import LongestCommonSubsequence
 import unittest
 
-class TestLongestCommonSubsequence(unittest.TestCase):
+from longest_common_subsequence import LongestCommonSubsequence
 
+
+class TestLongestCommonSubsequence(unittest.TestCase):
     def setUp(self):
         # Initialize your testing setup if needed
         pass
@@ -46,5 +47,6 @@ class TestLongestCommonSubsequence(unittest.TestCase):
         result = LongestCommonSubsequence(text1, text2)
         self.assertEqual(result, 4)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
