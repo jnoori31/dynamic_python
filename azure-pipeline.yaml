@@ -17,7 +17,6 @@ stages:
     steps:
     - checkout: self  # Check out the source code
 
-
     - script: |
         echo 'Building...'
         pip install -r requirements.txt  # Install project dependencies
@@ -46,12 +45,17 @@ stages:
 
 - stage: MergeToMain
   jobs:
-  - job: MergeToMain
-    dependsOn: ManualIntervention
+  - job: DummyJob
+    displayName: 'Dummy Job'
+    steps:
+    - script: echo 'This is a dummy job'
+
+  - job: MergeToMain-$(Build.SourceBranchName)
+    displayName: 'Merge to Main - $(Build.SourceBranchName)'
+    dependsOn: DummyJob, ManualInterventionJob
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/pull/$(System.PullRequest.PullRequestId)/merge'))
     steps:
     - checkout: self  # Check out the main branch for the merge
-
     - script: |
         echo 'Merging to main...'
         git config user.email "$(GIT_USER_EMAIL)"
