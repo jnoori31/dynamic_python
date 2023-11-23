@@ -60,5 +60,5 @@ stages:
         git config user.name "$(GIT_USER_NAME)"
         git checkout development
         git merge --no-ff --no-edit $(Build.SourceBranch)
-        git push github/development
+        git push github
       displayName: 'Merge to Main'
