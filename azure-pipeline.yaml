@@ -49,7 +49,7 @@ stages:
   - job: MergeToMain
     displayName: 'Merge to Main - $(Build.SourceBranchName)'
 
-    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/practiceProduction'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/development'))
 
 
     steps:
@@ -58,7 +58,7 @@ stages:
         echo 'Merging to main...'
         git config user.email "$(GIT_USER_EMAIL)"
         git config user.name "$(GIT_USER_NAME)"
-        git checkout practiceProduction
+        git checkout development
         git merge --no-ff --no-edit $(Build.SourceBranch)
-        git push practiceProduction
+        git push github/development
       displayName: 'Merge to Main'
