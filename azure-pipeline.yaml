@@ -35,7 +35,7 @@ stages:
   - deployment: ManualInterventionJob
     pool:
       vmImage: 'ubuntu-latest'
-    environment: 'Quality Assurance'
+    environment: 'ManualStage'
     strategy:
       runOnce:
         deploy:
