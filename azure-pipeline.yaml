@@ -17,6 +17,7 @@ stages:
     steps:
     - checkout: self  # Check out the source code
 
+    # Replace the following script with your actual build and test commands
     - script: |
         echo 'Building...'
         pip install -r requirements.txt  # Install project dependencies
@@ -43,8 +44,8 @@ stages:
           - script: echo "Waiting for manual intervention..."
             displayName: 'Manual Intervention'
 
-
-
+- stage: MergeToMain
+  jobs:
   - job: MergeToMain
     displayName: 'Merge to Main - $(Build.SourceBranchName)'
 
@@ -57,6 +58,6 @@ stages:
         git config user.email "$(GIT_USER_EMAIL)"
         git config user.name "$(GIT_USER_NAME)"
         git checkout main
-        git merge --no-ff --no-edit $(System.PullRequest.SourceBranch)
+        git merge --no-ff --no-edit $(Build.SourceBranch)
         git push origin main
       displayName: 'Merge to Main'
