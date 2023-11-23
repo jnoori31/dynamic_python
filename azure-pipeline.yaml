@@ -1,12 +1,14 @@
 trigger:
   branches:
-    include:
-      - development  # Your development branch name
+    exclude:
+      - '*'
+  pr:
+    branches:
+      include:
+        - '*'
 
-pr:
-  branches:
-    include:
-      - development  # Your development branch name
+variables:
+- group: GitConfigVariables
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -16,19 +18,48 @@ stages:
   jobs:
   - job: BuildAndTest
     steps:
-    - script: echo 'Building and testing...'
+    - checkout: self  # Check out the source code
+
+    # Replace the following script with your actual build and test commands
+    - script: |
+        echo 'Building...'
+        pip install -r requirements.txt  # Install project dependencies
+
+        echo 'Running unittest...'
+        python -m unittest discover -s /test -p '*_test.py'
+
+        echo 'Running pytest...'
+        pip install -r requirements-test.txt  # Install test dependencies
+        pytest -s /test
       displayName: 'Build and Test'
+
+- stage: ManualIntervention
+  jobs:
+  - deployment: ManualInterventionJob
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: 'YourEnvironmentName'  # Replace with your environment name
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - script: echo "Waiting for manual intervention..."
+            displayName: 'Manual Intervention'
 
 - stage: MergeToMain
   jobs:
   - job: MergeToMain
+    dependsOn: ManualIntervention
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/pull/$(System.PullRequest.PullRequestId)/merge'))
     steps:
-    - script: echo 'Merging to main...'
-      displayName: 'Merge to Main'
+    - checkout: self  # Check out the main branch for the merge
 
-- stage: PublishResults
-  jobs:
-  - job: PublishResults
-    steps:
-    - script: echo 'Publishing test results...'
-      displayName: 'Publish Test Results'
+    - script: |
+        echo 'Merging to main...'
+        git config user.email "$(GIT_USER_EMAIL)"
+        git config user.name "$(GIT_USER_NAME)"
+        git checkout main
+        git merge --no-ff --no-edit $(Build.SourceBranch)
+        git push origin main
+      displayName: 'Merge to Main'
