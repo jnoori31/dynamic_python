@@ -49,7 +49,8 @@ stages:
   - job: MergeToMain
     displayName: 'Merge to Main - $(Build.SourceBranchName)'
 
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/development'))
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
+
 
     steps:
     - checkout: self  # Check out the main branch for the merge
