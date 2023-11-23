@@ -22,11 +22,11 @@ stages:
         pip install -r requirements.txt  # Install project dependencies
 
         echo 'Running unittest...'
-        python -m unittest discover -s /test -p '*_test.py'
+        python -m unittest discover -s test -p '*_test.py'
 
         echo 'Running pytest...'
         pip install -r requirements-test.txt  # Install test dependencies
-        pytest -s /test
+        pytest -s test
       displayName: 'Build and Test'
 
 - stage: ManualIntervention
