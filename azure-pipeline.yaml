@@ -45,7 +45,7 @@ stages:
 
 
 
-  - job: MergeToMain-$(Build.SourceBranchName)
+  - job: MergeToMain
     displayName: 'Merge to Main - $(Build.SourceBranchName)'
 
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/pull/$(System.PullRequest.PullRequestId)/merge'))
