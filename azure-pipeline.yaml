@@ -58,7 +58,7 @@ stages:
         echo 'Merging to main...'
         git config user.email "$(GIT_USER_EMAIL)"
         git config user.name "$(GIT_USER_NAME)"
-        git checkout github/development
+        git checkout -b development
         git merge --no-ff --no-edit development
-        git push github
+        git push github your-feature-branch:refs/heads/development
       displayName: 'Merge to Main'
